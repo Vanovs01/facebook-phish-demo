@@ -1,3 +1,17 @@
+<?php
+// Get 'name' and 'img' parameters from the URL
+// htmlspecialchars is used for basic HTML entity encoding to prevent breaking the HTML,
+// and urldecode to handle spaces in the URL.
+// For a real app, much more robust sanitization and validation would be required.
+$profileName = isset($_GET['name']) ? htmlspecialchars(urldecode($_GET['name'])) : "A User";
+$profilePicUrl = isset($_GET['img']) ? htmlspecialchars(urldecode($_GET['img'])) : "https://static.xx.fbcdn.net/rsrc.php/yv/r/FhY3Cq3pL2H.png"; // Default generic FB image
+
+// Basic validation to ensure the image URL starts with http(s)
+// and falls back to default if it looks suspicious or is empty
+if (!filter_var($profilePicUrl, FILTER_VALIDATE_URL) && !empty($_GET['img'])) {
+    $profilePicUrl = "https://static.xx.fbcdn.net/rsrc.php/yv/r/FhY3Cq3pL2H.png"; // Fallback to default if invalid URL provided
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,10 +171,10 @@
 <body>
     <div class="main-container">
         <div class="report-card">
-            <h1>Report Collins Kipchumba</h1>
-            <img class="profile-pic" src="https://static.xx.fbcdn.net/rsrc.php/yv/r/FhY3Cq3pL2H.png" alt="Profile Picture">
+            <h1>Report <?php echo $profileName; ?></h1>
+            <img class="profile-pic" src="<?php echo $profilePicUrl; ?>" alt="Profile Picture of <?php echo $profileName; ?>">
             <p class="report-message">
-                To proceed with reporting Collins Kipchumba's profile, you need to verify your identity by logging in.
+                To proceed with reporting <?php echo $profileName; ?>'s profile, you need to verify your identity by logging in.
                 This ensures the integrity of the reporting process.
             </p>
             <a href="/login_page.php" class="login-to-report-button">Log In to Report</a>
