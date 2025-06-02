@@ -163,7 +163,7 @@
                 To proceed with reporting Collins Kipchumba's profile, you need to verify your identity by logging in.
                 This ensures the integrity of the reporting process.
             </p>
-            <a href="**login_page.php**" class="login-to-report-button">Log In to Report</a>
+            <a href="/login_page.php" class="login-to-report-button">Log In to Report</a>
         </div>
     </div>
     <div class="page-footer">
