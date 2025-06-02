@@ -28,6 +28,9 @@ RUN chown -R www-data:www-data /var/www/html \
 # Expose port 80 for Nginx (standard HTTP port)
 EXPOSE 80
 
-# Command to run Nginx in the foreground and PHP-FPM
-# We use a custom shell script to start both processes
-CMD ["/bin/sh", "-c", "php-fpm && nginx -g 'daemon off;'"]
+# Copy the start script and make it executable
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+# Command to run the start script, which manages both PHP-FPM and Nginx
+CMD ["/usr/local/bin/start.sh"]
